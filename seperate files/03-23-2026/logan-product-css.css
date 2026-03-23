@@ -1,0 +1,10 @@
+/* Logan - extra styles for product page */
+/* main styles are in styles.css, this is just product specific stuff */
+
+#searchBox {
+  border-radius: 0;
+}
+
+#filterCategory {
+  border-radius: 0;
+}

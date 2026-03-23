@@ -1,0 +1,54 @@
+<!-- Will: product detail fields for the new/update form -->
+<!-- product id (required), description (required), category (required), unit of measure (required), price (required), weight (optional) -->
+
+<div class="form-group">
+  <label>Product ID (Required)</label>
+  <input type="text" class="form-control" id="productId">
+  <div id="productIdError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Product Description (Required)</label>
+  <input type="text" class="form-control" id="productDesc">
+  <div id="productDescError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Product Category (Required)</label>
+  <select class="form-control" id="productCategory">
+    <option value="">Select a Category</option>
+    <option value="Consumer Electronics">Consumer Electronics</option>
+    <option value="IT and Networking">IT and Networking</option>
+    <option value="Computer Components">Computer Components</option>
+    <option value="Peripherals">Peripherals</option>
+    <option value="Accessories">Accessories</option>
+  </select>
+  <div id="productCategoryError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Unit of Measure (Required)</label>
+  <select class="form-control" id="productUnit">
+    <option value="">Select Unit</option>
+    <option value="Each">Each</option>
+    <option value="Pack">Pack</option>
+    <option value="Box">Box</option>
+    <option value="Set">Set</option>
+    <option value="Case">Case</option>
+  </select>
+  <div id="productUnitError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Product Price (Required)</label>
+  <input type="number" class="form-control" id="productPrice">
+  <div id="productPriceError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Product Weight (Optional)</label>
+  <input type="number" class="form-control" id="productWeight">
+</div>
+
+<button type="submit" class="btn btn-signup btn-block" id="submitBtn">SAVE PRODUCT</button>
+<button type="button" class="btn btn-default btn-block" id="cancelBtn" style="display:none;" onclick="cancelEdit()">CANCEL</button>

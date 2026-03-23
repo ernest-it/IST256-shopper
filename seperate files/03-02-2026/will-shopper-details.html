@@ -1,0 +1,40 @@
+<!-- Will: shopper detail fields for the new/update form -->
+<!-- email (required), name (required), phone (optional), age (required), address (required) -->
+
+<div class="form-group">
+  <label>Shopper Email Address (Required)</label>
+  <input type="email" class="form-control" id="email">
+  <div id="emailError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Password (Required)</label>
+  <input type="password" class="form-control" id="password">
+  <div id="passwordError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Shopper Name (Required)</label>
+  <input type="text" class="form-control" id="name">
+  <div id="nameError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Shopper Contact Phone Number (Optional)</label>
+  <input type="text" class="form-control" id="phone">
+</div>
+
+<div class="form-group">
+  <label>Shopper Age (Required)</label>
+  <input type="number" class="form-control" id="age">
+  <div id="ageError" class="error"></div>
+</div>
+
+<div class="form-group">
+  <label>Shopper Address (Required)</label>
+  <input type="text" class="form-control" id="address">
+  <div id="addressError" class="error"></div>
+</div>
+
+<button type="submit" class="btn btn-signup btn-block" id="submitBtn">SAVE SHOPPER</button>
+<button type="button" class="btn btn-default btn-block" id="cancelBtn" style="display:none;" onclick="cancelEdit()">CANCEL</button>

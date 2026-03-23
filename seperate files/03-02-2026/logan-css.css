@@ -1,0 +1,114 @@
+/* Logan: styles for the shopper management page */
+
+body {
+  font: 400 15px Lato, sans-serif;
+  line-height: 1.8;
+  color: #222;
+  background: #f4f4f4;
+}
+
+.navbar {
+  margin-bottom: 0;
+  background-color: #1f1f1f;
+  z-index: 9999;
+  border: 0;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  border-radius: 0;
+  font-family: Montserrat, sans-serif;
+}
+
+.navbar li a, .navbar .navbar-brand {
+  color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+  color: #1f1f1f !important;
+  background-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.jumbotron {
+  background-color: #1f1f1f;
+  color: #ffffff;
+  padding: 100px 25px;
+  font-family: Montserrat, sans-serif;
+}
+
+.container-fluid {
+  padding: 60px 50px;
+}
+
+.panel {
+  border: 1px solid #1f1f1f;
+  border-radius: 0;
+}
+
+.panel-heading {
+  color: #fff !important;
+  background-color: #1f1f1f !important;
+  padding: 25px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.btn-signup {
+  background-color: #1f1f1f;
+  color: #fff;
+  border-radius: 0;
+  padding: 10px 30px;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: 2px;
+}
+
+.btn-signup:hover {
+  background-color: #fff;
+  color: #1f1f1f;
+  border: 1px solid #1f1f1f;
+}
+
+.table > thead > tr > th {
+  background-color: #1f1f1f;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+/* error text under form fields */
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* json collection display */
+#jsonOutput {
+  background-color: #fff;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 0;
+  font-family: monospace;
+  text-align: left;
+  white-space: pre;
+  display: none;
+}
+
+footer {
+  text-align: center;
+  padding: 14px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
