@@ -1,0 +1,134 @@
+<!-- Logan: page structure for the restaurant browser view -->
+
+<div class="jumbotron text-center" style="margin-top:50px;">
+  <h1>Browse Restaurants</h1>
+  <p>Discover, search, and save your favorite places to eat.</p>
+</div>
+
+<!-- search, filter, and sort section -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center"><h3>Search and Filter</h3></div>
+        <div class="panel-body filter-bar">
+
+          <div class="row controls-row">
+            <div class="col-sm-12">
+              <label for="searchBox">Search by Name or Description</label>
+              <input type="text"
+                     class="form-control"
+                     id="searchBox"
+                     placeholder="Type to search..."
+                     [(ngModel)]="searchText"
+                     (ngModelChange)="onFilterChange()">
+            </div>
+          </div>
+
+          <div class="row controls-row">
+            <div class="col-sm-3">
+              <label>Cuisine</label>
+              <select class="form-control"
+                      [(ngModel)]="selectedCuisine"
+                      (ngModelChange)="onFilterChange()">
+                <option value="All">All Cuisines</option>
+                @for (c of cuisines; track c) {
+                  <option [value]="c">{{ c }}</option>
+                }
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <label>Price Range</label>
+              <select class="form-control"
+                      [(ngModel)]="selectedPrice"
+                      (ngModelChange)="onFilterChange()">
+                <option value="All">All Prices</option>
+                <option value="$">$</option>
+                <option value="$$">$$</option>
+                <option value="$$$">$$$</option>
+                <option value="$$$$">$$$$</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <label>Minimum Rating</label>
+              <select class="form-control"
+                      [(ngModel)]="minRating"
+                      (ngModelChange)="onFilterChange()">
+                <option [ngValue]="0">Any Rating</option>
+                <option [ngValue]="3">3.0 and above</option>
+                <option [ngValue]="4">4.0 and above</option>
+                <option [ngValue]="4.5">4.5 and above</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <label>Sort By</label>
+              <select class="form-control"
+                      [(ngModel)]="sortBy"
+                      (ngModelChange)="onFilterChange()">
+                <option value="ratingDesc">Rating high to low</option>
+                <option value="ratingAsc">Rating low to high</option>
+                <option value="priceAsc">Price low to high</option>
+                <option value="priceDesc">Price high to low</option>
+                <option value="nameAsc">Name A to Z</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row controls-row">
+            <div class="col-sm-12 text-center">
+              <button type="button" class="btn btn-primary-flat" (click)="clearFilters()">CLEAR FILTERS</button>
+              <span style="margin-left:20px;">{{ resultCount }}</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- restaurant cards grid -->
+<div class="container-fluid" style="padding-top:0;">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="row">
+
+        @if (loading) {
+          <div class="col-sm-12 empty-state">Loading restaurants...</div>
+        } @else if (filtered.length === 0) {
+          <div class="col-sm-12 empty-state">No restaurants match your filters.</div>
+        } @else {
+          @for (r of filtered; track r.id) {
+            <div class="col-sm-6 col-md-4">
+              <div class="restaurant-card">
+                <span class="fav-heart"
+                      [class.active]="isFavorite(r.id)"
+                      (click)="toggleFavorite(r.id)">
+                  {{ isFavorite(r.id) ? '♥' : '♡' }}
+                </span>
+                <h4 class="card-name">{{ r.name }}</h4>
+                <span class="card-cuisine">{{ r.cuisine }}</span>
+                <div class="card-row">
+                  <span class="label">RATING</span>
+                  <span class="card-rating">{{ stars(r.rating) }}</span>
+                  {{ r.rating.toFixed(1) }}
+                </div>
+                <div class="card-row">
+                  <span class="label">PRICE</span>
+                  <span class="card-price">{{ r.priceRange }}</span>
+                </div>
+                <div class="card-row">
+                  <span class="label">AREA</span>{{ r.location }}
+                </div>
+                <div class="card-actions">
+                  <a class="btn btn-primary-flat" [routerLink]="['/detail', r.id]">VIEW DETAILS</a>
+                </div>
+              </div>
+            </div>
+          }
+        }
+
+      </div>
+    </div>
+  </div>
+</div>

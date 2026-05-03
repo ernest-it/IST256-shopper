@@ -1,0 +1,1290 @@
+
+
+
+
+
+
+
+
+
+
+IST256
+
+Web Storefront: Product Management Web Page
+
+TechVault Electronics
+
+New / Update Product Details Form
+
+Group Members:
+
+Logan – Sections 1 (HTML), 2 (CSS), 3 (Bootstrap)
+
+Will – Sections 3 (Bootstrap) and 6 (Product Details)
+
+Mason – Section 5 (JSON Product Collection & jQuery Search/Filter)
+
+Jeremy – Section 4 (JavaScript)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Section 1: HTML (Page Structure)
+
+Author: Logan
+
+I did the HTML structure in product.html. The page uses the same fixed navbar from the shopper page with links to all sections of the storefront, but this time the Products tab is marked as active. Below that is a jumbotron banner for the Product Management page. The first main section is the product form where users can add a new product or update an existing one. The form collects a product ID, description, category, unit of measure, price, and weight. Below the form is a search and filter panel that lets users narrow down the product list by category or by typing a keyword. At the bottom of the page is a table that displays all the products that have been added to the catalog, with Edit and Delete buttons for each row. I linked Bootstrap 3.4.1, jQuery, and Google Fonts (Montserrat and Lato) through CDNs in the head, and brought in the shared styles.css file.
+
+ 1. <!DOCTYPE html>
+
+ 2. <html lang="en">
+
+ 3. <head>
+
+ 4.   <title>TechVault Product Management</title>
+
+ 5.   <meta charset="utf-8">
+
+ 6.   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ 7.   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+
+ 8.   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+
+ 9.   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+10.   <link rel="stylesheet" href="styles.css">
+
+11.   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+12.   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+13. </head>
+
+14. <body>
+
+15.
+
+16. <nav class="navbar navbar-default navbar-fixed-top">
+
+17.   <div class="container">
+
+18.     <div class="navbar-header">
+
+19.       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+
+20.         <span class="icon-bar"></span>
+
+21.         <span class="icon-bar"></span>
+
+22.         <span class="icon-bar"></span>
+
+23.       </button>
+
+24.       <a class="navbar-brand" href="#">TECHVAULT</a>
+
+25.     </div>
+
+26.     <div class="collapse navbar-collapse" id="myNavbar">
+
+27.       <ul class="nav navbar-nav navbar-right">
+
+28.         <li><a href="shopper.html">SHOPPERS</a></li>
+
+29.         <li class="active"><a href="product.html">PRODUCTS</a></li>
+
+30.         <li><a href="cart.html">CART</a></li>
+
+31.         <li><a href="shipping.html">SHIPPING</a></li>
+
+32.         <li><a href="billing.html">BILLING</a></li>
+
+33.       </ul>
+
+34.     </div>
+
+35.   </div>
+
+36. </nav>
+
+37.
+
+38. <div class="jumbotron text-center" style="margin-top:50px;">
+
+39.   <h1>Product Management</h1>
+
+40.   <p>Add, update, or remove products from the TechVault catalog.</p>
+
+41. </div>
+
+42.
+
+43. <!-- new and update product form -->
+
+44. <div class="container-fluid">
+
+45.   <div class="row">
+
+46.     <div class="col-sm-8 col-sm-offset-2">
+
+47.       <div class="panel panel-default text-center">
+
+48.         <div class="panel-heading"><h3 id="formTitle">Add New Product</h3></div>
+
+49.         <div class="panel-body" style="text-align:left; padding:30px;">
+
+50.           <form id="productForm" novalidate>
+
+51.
+
+52.             <!-- product detail fields -->
+
+53.
+
+54.           </form>
+
+55.
+
+56.           <div id="jsonOutput"></div>
+
+57.
+
+58.         </div>
+
+59.       </div>
+
+60.     </div>
+
+61.   </div>
+
+62. </div>
+
+63.
+
+64. <!-- search/filter section -->
+
+65. <div class="container-fluid">
+
+66.   <div class="row">
+
+67.     <div class="col-sm-8 col-sm-offset-2">
+
+68.       <div class="panel panel-default text-center">
+
+69.         <div class="panel-heading"><h3>Search Products</h3></div>
+
+70.         <div class="panel-body" style="text-align:left; padding:30px;">
+
+71.
+
+72.           <div class="form-group">
+
+73.             <label>Filter by Category</label>
+
+74.             <select class="form-control" id="filterCategory">
+
+75.               <option value="All">All Categories</option>
+
+76.               <option value="Consumer Electronics">Consumer Electronics</option>
+
+77.               <option value="IT and Networking">IT and Networking</option>
+
+78.               <option value="Computer Components">Computer Components</option>
+
+79.               <option value="Peripherals">Peripherals</option>
+
+80.               <option value="Accessories">Accessories</option>
+
+81.             </select>
+
+82.           </div>
+
+83.
+
+84.           <div class="form-group">
+
+85.             <label>Search by Name or Description</label>
+
+86.             <input type="text" class="form-control" id="searchBox" placeholder="Type to search...">
+
+87.           </div>
+
+88.
+
+89.           <button type="button" class="btn btn-signup btn-block" id="searchBtn">SEARCH</button>
+
+90.
+
+91.         </div>
+
+92.       </div>
+
+93.     </div>
+
+94.   </div>
+
+95. </div>
+
+96.
+
+97. <!-- product table -->
+
+98. <div class="container-fluid">
+
+99.   <div class="row">
+
+100.     <div class="col-sm-10 col-sm-offset-1">
+
+101.       <div class="panel panel-default text-center">
+
+102.         <div class="panel-heading"><h3>Product Catalog</h3></div>
+
+103.         <div class="panel-body" style="padding:30px;">
+
+104.           <table class="table table-striped table-bordered">
+
+105.             <thead>
+
+106.               <tr>
+
+107.                 <th>Product ID</th>
+
+108.                 <th>Description</th>
+
+109.                 <th>Category</th>
+
+110.                 <th>Unit</th>
+
+111.                 <th>Price</th>
+
+112.                 <th>Weight</th>
+
+113.                 <th>Actions</th>
+
+114.               </tr>
+
+115.             </thead>
+
+116.             <tbody id="productTableBody">
+
+117.               <tr><td colspan="7" class="text-center">No products added yet.</td></tr>
+
+118.             </tbody>
+
+119.           </table>
+
+120.         </div>
+
+121.       </div>
+
+122.     </div>
+
+123.   </div>
+
+124. </div>
+
+125.
+
+126. <footer class="container-fluid text-center">
+
+127.   <p>&copy; 2026 TechVault Electronics</p>
+
+128. </footer>
+
+129.
+
+130. </body>
+
+131. </html>
+
+132.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Section 2: CSS (Page Style and Cosmetics)
+
+Author: Logan
+
+The product page shares the same styles.css file that was created for the shopper page, so the overall look stays consistent across the site. The dark #1F1F1F color carries over to the navbar, panel headers, buttons, and table headers. The light gray background, flat corners, and hover effects on buttons are all the same. The .error class still handles red validation text under form fields, and the jsonOutput div uses a monospace font for formatted JSON display. For the product page specifically, I added a couple extra rules to make sure the search box and category filter dropdown also have square corners to match the rest of the design.
+
+ 1. /* Logan - shared styles (styles.css) */
+
+ 2. body { font: 400 15px Lato, sans-serif; line-height: 1.8; color: #222; background: #f4f4f4; }
+
+ 3. .navbar { margin-bottom: 0; background-color: #1f1f1f; z-index: 9999; border: 0; font-size: 12px !important; line-height: 1.42857143 !important; letter-spacing: 4px; border-radius: 0; font-family: Montserrat, sans-serif; }
+
+ 4. .navbar li a, .navbar .navbar-brand { color: #fff !important; }
+
+ 5. .navbar-nav li a:hover, .navbar-nav li.active a { color: #1f1f1f !important; background-color: #fff !important; }
+
+ 6. .navbar-default .navbar-toggle { border-color: transparent; color: #fff !important; }
+
+ 7. .jumbotron { background-color: #1f1f1f; color: #ffffff; padding: 100px 25px; font-family: Montserrat, sans-serif; }
+
+ 8. .container-fluid { padding: 60px 50px; }
+
+ 9. .panel { border: 1px solid #1f1f1f; border-radius: 0; }
+
+10. .panel-heading { color: #fff !important; background-color: #1f1f1f !important; padding: 25px; border-bottom: 1px solid transparent; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; }
+
+11. .form-control { border-radius: 0; }
+
+12. .btn-signup { background-color: #1f1f1f; color: #fff; border-radius: 0; padding: 10px 30px; font-family: Montserrat, sans-serif; letter-spacing: 2px; }
+
+13. .btn-signup:hover { background-color: #fff; color: #1f1f1f; border: 1px solid #1f1f1f; }
+
+14. .table > thead > tr > th { background-color: #1f1f1f; color: #fff; font-family: Montserrat, sans-serif; letter-spacing: 1px; font-size: 12px; }
+
+15. .error { color: red; font-size: 13px; margin-top: 5px; }
+
+16. #jsonOutput { background-color: #fff; padding: 15px; margin-top: 20px; border-radius: 0; font-family: monospace; text-align: left; white-space: pre; display: none; }
+
+17. footer { text-align: center; padding: 14px; border-top: 1px solid #ddd; background: #fff; }
+
+18.
+
+19. /* Logan - product page specific styles */
+
+20. #searchBox { border-radius: 0; }
+
+21. #filterCategory { border-radius: 0; }
+
+22.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Section 3: Bootstrap (Professional Look)
+
+Author: Logan & Will
+
+We used the same Bootstrap setup from the shopper page to keep the product page consistent. The navbar sticks to the top with navbar-fixed-top and collapses on mobile with the toggle button. The jumbotron creates the page banner. We used container-fluid with column classes to center and size each section.
+
+The product form, search panel, and product table are each wrapped in a Bootstrap panel with a header and body. Form fields use form-group and form-control for consistent input styling. The category and unit of measure fields use select dropdowns instead of text inputs. The product table uses table-striped and table-bordered for readability, with seven columns including an Actions column for Edit and Delete buttons. The search panel uses the same panel and form-control classes for the filter dropdown and keyword input. Buttons use btn-block to stretch full width within their panels.
+
+
+
+ 1. <!-- Bootstrap CSS and JS -->
+
+ 2. <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+ 3. <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+ 4. <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+ 5.
+
+ 6. <!-- responsive navbar with collapse for mobile -->
+
+ 7. <nav class="navbar navbar-default navbar-fixed-top">
+
+ 8.   <div class="container">
+
+ 9.     <div class="navbar-header">
+
+10.       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+
+11.         <span class="icon-bar"></span>
+
+12.         <span class="icon-bar"></span>
+
+13.         <span class="icon-bar"></span>
+
+14.       </button>
+
+15.       <a class="navbar-brand" href="#">TECHVAULT</a>
+
+16.     </div>
+
+17.     <div class="collapse navbar-collapse" id="myNavbar">
+
+18.       <ul class="nav navbar-nav navbar-right">
+
+19.         <li><a href="shopper.html">SHOPPERS</a></li>
+
+20.         <li class="active"><a href="product.html">PRODUCTS</a></li>
+
+21.         <li><a href="cart.html">CART</a></li>
+
+22.         <li><a href="shipping.html">SHIPPING</a></li>
+
+23.         <li><a href="billing.html">BILLING</a></li>
+
+24.       </ul>
+
+25.     </div>
+
+26.   </div>
+
+27. </nav>
+
+28.
+
+29. <!-- bootstrap jumbotron header -->
+
+30. <div class="jumbotron text-center" style="margin-top:50px;">
+
+31.   <h1>Product Management</h1>
+
+32.   <p>Add, update, or remove products from the TechVault catalog.</p>
+
+33. </div>
+
+34.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Section 4: JavaScript (Page Behaviors & Field Integrity Checks)
+
+Author: Jeremy
+
+I did the JavaScript that powers the product page. There is one main form for adding and updating products. When the form is submitted, the script validates each required field. Product ID and description can't be blank. Category and unit of measure must have a selection made from the dropdown. Price has to be a number greater than zero. Weight is optional so it doesn't get validated. If something is wrong, a red error message appears under that field.
+
+When adding a new product, the script also checks for duplicate product IDs by looping through the existing collection to make sure no two products share the same ID. Products are stored in an array called productCollection. When validation passes, a product object is created from the form values and added to the array. A variable called editIndex tracks whether the user is adding a new product or editing an existing one. After saving, rebuildTable() regenerates the table rows from the array. The editProduct() function loads a product's data back into the form for editing, and deleteProduct() removes a product from the array using splice. cancelEdit() clears the form and resets back to add mode.
+
+
+
+ 1. // product array and edit tracker
+
+ 2. var productCollection = [];
+
+ 3. var editIndex = -1;
+
+ 4.
+
+ 5. // handle add/update product submit
+
+ 6. document.getElementById("productForm").addEventListener("submit", function(event) {
+
+ 7.   event.preventDefault();
+
+ 8.
+
+ 9.   var isValid = true;
+
+10.
+
+11.   var pid = document.getElementById("productId").value.trim();
+
+12.   var desc = document.getElementById("productDesc").value.trim();
+
+13.   var cat = document.getElementById("productCategory").value;
+
+14.   var unit = document.getElementById("productUnit").value;
+
+15.   var price = document.getElementById("productPrice").value.trim();
+
+16.   var weight = document.getElementById("productWeight").value.trim();
+
+17.
+
+18.   // clear old errors
+
+19.   document.getElementById("productIdError").innerHTML = "";
+
+20.   document.getElementById("productDescError").innerHTML = "";
+
+21.   document.getElementById("productCategoryError").innerHTML = "";
+
+22.   document.getElementById("productUnitError").innerHTML = "";
+
+23.   document.getElementById("productPriceError").innerHTML = "";
+
+24.
+
+25.   if (pid === "") {
+
+26.     document.getElementById("productIdError").innerHTML = "Product ID is required.";
+
+27.     isValid = false;
+
+28.   }
+
+29.
+
+30.   // if adding new product, check for duplicate id
+
+31.   if (pid !== "" && editIndex === -1) {
+
+32.     for (var i = 0; i < productCollection.length; i++) {
+
+33.       if (productCollection[i].productId === pid) {
+
+34.         document.getElementById("productIdError").innerHTML = "This Product ID already exists.";
+
+35.         isValid = false;
+
+36.         break;
+
+37.       }
+
+38.     }
+
+39.   }
+
+40.
+
+41.   if (desc === "") {
+
+42.     document.getElementById("productDescError").innerHTML = "Product description is required.";
+
+43.     isValid = false;
+
+44.   }
+
+45.
+
+46.   if (cat === "") {
+
+47.     document.getElementById("productCategoryError").innerHTML = "Please select a category.";
+
+48.     isValid = false;
+
+49.   }
+
+50.
+
+51.   if (unit === "") {
+
+52.     document.getElementById("productUnitError").innerHTML = "Please select a unit of measure.";
+
+53.     isValid = false;
+
+54.   }
+
+55.
+
+56.   if (price === "" || isNaN(price) || price <= 0) {
+
+57.     document.getElementById("productPriceError").innerHTML = "Valid price is required.";
+
+58.     isValid = false;
+
+59.   }
+
+60.
+
+61.   if (isValid) {
+
+62.
+
+63.     var product = {
+
+64.       productId: pid,
+
+65.       productDescription: desc,
+
+66.       productCategory: cat,
+
+67.       productUnit: unit,
+
+68.       productPrice: price,
+
+69.       productWeight: weight
+
+70.     };
+
+71.
+
+72.     if (editIndex === -1) {
+
+73.       // adding new product
+
+74.       productCollection.push(product);
+
+75.     } else {
+
+76.       // updating existing
+
+77.       productCollection[editIndex] = product;
+
+78.       editIndex = -1;
+
+79.       document.getElementById("formTitle").innerHTML = "Add New Product";
+
+80.       document.getElementById("submitBtn").innerHTML = "SAVE PRODUCT";
+
+81.       document.getElementById("cancelBtn").style.display = "none";
+
+82.     }
+
+83.
+
+84.     // show the JSON
+
+85.     document.getElementById("jsonOutput").style.display = "block";
+
+86.     document.getElementById("jsonOutput").textContent = JSON.stringify(productCollection, null, 2);
+
+87.
+
+88.     rebuildTable();
+
+89.
+
+90.     document.getElementById("productForm").reset();
+
+91.   }
+
+92.
+
+93. });
+
+94.
+
+95. // rebuild the product table
+
+96. function rebuildTable() {
+
+97.   var tbody = document.getElementById("productTableBody");
+
+98.   tbody.innerHTML = "";
+
+99.
+
+100.   if (productCollection.length === 0) {
+
+101.     tbody.innerHTML = '<tr><td colspan="7" class="text-center">No products added yet.</td></tr>';
+
+102.     return;
+
+103.   }
+
+104.
+
+105.   for (var i = 0; i < productCollection.length; i++) {
+
+106.     var p = productCollection[i];
+
+107.     var row = document.createElement("tr");
+
+108.     row.innerHTML =
+
+109.       "<td>" + p.productId + "</td>" +
+
+110.       "<td>" + p.productDescription + "</td>" +
+
+111.       "<td>" + p.productCategory + "</td>" +
+
+112.       "<td>" + p.productUnit + "</td>" +
+
+113.       "<td>$" + p.productPrice + "</td>" +
+
+114.       "<td>" + p.productWeight + "</td>" +
+
+115.       '<td>' +
+
+116.         '<button class="btn btn-signup btn-sm" onclick="editProduct(' + i + ')">Edit</button> ' +
+
+117.         '<button class="btn btn-danger btn-sm" onclick="deleteProduct(' + i + ')">Delete</button>' +
+
+118.       '</td>';
+
+119.     tbody.appendChild(row);
+
+120.   }
+
+121. }
+
+122.
+
+123. // load a product into the form for editing
+
+124. function editProduct(index) {
+
+125.   var p = productCollection[index];
+
+126.   editIndex = index;
+
+127.
+
+128.   document.getElementById("productId").value = p.productId;
+
+129.   document.getElementById("productDesc").value = p.productDescription;
+
+130.   document.getElementById("productCategory").value = p.productCategory;
+
+131.   document.getElementById("productUnit").value = p.productUnit;
+
+132.   document.getElementById("productPrice").value = p.productPrice;
+
+133.   document.getElementById("productWeight").value = p.productWeight;
+
+134.
+
+135.   document.getElementById("formTitle").innerHTML = "Update Product Details";
+
+136.   document.getElementById("submitBtn").innerHTML = "UPDATE PRODUCT";
+
+137.   document.getElementById("cancelBtn").style.display = "block";
+
+138.
+
+139.   window.scrollTo(0, document.getElementById("productForm").offsetTop);
+
+140. }
+
+141.
+
+142. // remove a product
+
+143. function deleteProduct(index) {
+
+144.   productCollection.splice(index, 1);
+
+145.
+
+146.   if (productCollection.length > 0) {
+
+147.     document.getElementById("jsonOutput").textContent = JSON.stringify(productCollection, null, 2);
+
+148.   } else {
+
+149.     document.getElementById("jsonOutput").style.display = "none";
+
+150.   }
+
+151.
+
+152.   rebuildTable();
+
+153. }
+
+154.
+
+155. // cancel editing
+
+156. function cancelEdit() {
+
+157.   editIndex = -1;
+
+158.   document.getElementById("productForm").reset();
+
+159.   document.getElementById("formTitle").innerHTML = "Add New Product";
+
+160.   document.getElementById("submitBtn").innerHTML = "SAVE PRODUCT";
+
+161.   document.getElementById("cancelBtn").style.display = "none";
+
+162. }
+
+163.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Section 5: JSON Product Document Collection & jQuery Search/Filter
+
+Author: Mason
+
+Product data is stored in a JavaScript array called productCollection. Each product is an object with six properties: productId, productDescription, productCategory, productUnit, productPrice, and productWeight. When someone saves the form, a new object is created and added to the array. If they were editing an existing product, the old entry gets replaced.
+
+The array is displayed on the page in a div called jsonOutput using JSON.stringify with formatting so it's indented and readable. The div is hidden by default and only shows up after the first product is saved. It updates every time a product is added, changed, or deleted.
+
+I also did the jQuery code for the search and filter feature. When the search button is clicked, the script loops through productCollection and checks each product against the selected category and the keyword typed in the search box. The keyword is matched against both the product ID and description. The table is then rebuilt with only the matching products. The filter also runs automatically when the category dropdown changes or when the user types in the search box, so results update in real time.
+
+
+ 1. // Mason: JSON product document collection and jQuery search/filter
+
+ 2.
+
+ 3. // productCollection is declared in jeremy-product-javascript.js
+
+ 4. // each product in the array looks like:
+
+ 5. // {
+
+ 6. //   "productId": "TV001",
+
+ 7. //   "productDescription": "55 Inch 4K Smart TV",
+
+ 8. //   "productCategory": "Consumer Electronics",
+
+ 9. //   "productUnit": "Each",
+
+10. //   "productPrice": "499.99",
+
+11. //   "productWeight": "35.00"
+
+12. // }
+
+13.
+
+14. // ---- jQuery: Search and Filter ----
+
+15.
+
+16. $(document).ready(function() {
+
+17.
+
+18.   // when search button is clicked
+
+19.   $("#searchBtn").on("click", function() {
+
+20.     let category = $("#filterCategory").val();
+
+21.     let keyword = $("#searchBox").val().trim().toLowerCase();
+
+22.
+
+23.     let filtered = [];
+
+24.
+
+25.     // go through all products and check if they match
+
+26.     for (let i = 0; i < productCollection.length; i++) {
+
+27.       let p = productCollection[i];
+
+28.
+
+29.       // category check
+
+30.       if (category !== "All" && p.productCategory !== category) {
+
+31.         continue;
+
+32.       }
+
+33.
+
+34.       // keyword check against id and description
+
+35.       if (keyword !== "") {
+
+36.         if (!p.productId.toLowerCase().includes(keyword) &&
+
+37.             !p.productDescription.toLowerCase().includes(keyword)) {
+
+38.           continue;
+
+39.         }
+
+40.       }
+
+41.
+
+42.       filtered.push(p);
+
+43.     }
+
+44.
+
+45.     // show filtered results in the table
+
+46.     let tbody = $("#productTableBody");
+
+47.     tbody.empty();
+
+48.
+
+49.     if (filtered.length === 0) {
+
+50.       tbody.html('<tr><td colspan="7" class="text-center">No products found.</td></tr>');
+
+51.       return;
+
+52.     }
+
+53.
+
+54.     $.each(filtered, function(i, p) {
+
+55.       // find which index this product is in the main array
+
+56.       let idx = productCollection.indexOf(p);
+
+57.       let row = "<tr>" +
+
+58.         "<td>" + p.productId + "</td>" +
+
+59.         "<td>" + p.productDescription + "</td>" +
+
+60.         "<td>" + p.productCategory + "</td>" +
+
+61.         "<td>" + p.productUnit + "</td>" +
+
+62.         "<td>$" + p.productPrice + "</td>" +
+
+63.         "<td>" + p.productWeight + "</td>" +
+
+64.         '<td>' +
+
+65.           '<button class="btn btn-signup btn-sm" onclick="editProduct(' + idx + ')">Edit</button> ' +
+
+66.           '<button class="btn btn-danger btn-sm" onclick="deleteProduct(' + idx + ')">Delete</button>' +
+
+67.         '</td>' +
+
+68.         "</tr>";
+
+69.       tbody.append(row);
+
+70.     });
+
+71.   });
+
+72.
+
+73.   // also run search when dropdown changes
+
+74.   $("#filterCategory").on("change", function() {
+
+75.     $("#searchBtn").click();
+
+76.   });
+
+77.
+
+78.   // search as you type
+
+79.   $("#searchBox").on("keyup", function() {
+
+80.     $("#searchBtn").click();
+
+81.   });
+
+82.
+
+83. });
+
+84.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Section 6: Product Details - Field Specification
+
+Author: Will
+
+The form collects six fields for each product. Five are required and one is optional.
+
+Product ID. Required. Text input. This is a unique identifier for each product in the catalog. When adding a new product, the system checks to make sure no other product already has the same ID.
+
+Product Description. Required. Text input for the product name or description. This is what shows up in the table and is searchable through the filter. Can't be blank.
+
+Product Category. Required. Dropdown select with five options: Consumer Electronics, IT and Networking, Computer Components, Peripherals, and Accessories. The user must pick one from the list.
+
+Unit of Measure. Required. Dropdown select with five options: Each, Pack, Box, Set, and Case. Determines how the product is sold. Must have a selection.
+
+Product Price. Required. Number input. Validated to make sure it's a number greater than zero. Displayed in the table with a dollar sign.
+
+Product Weight. Optional. Number input with no validation. If left blank, an empty string gets stored.
+
+
+
+ 1. <div class="form-group">
+
+ 2.   <label>Product ID (Required)</label>
+
+ 3.   <input type="text" class="form-control" id="productId">
+
+ 4.   <div id="productIdError" class="error"></div>
+
+ 5. </div>
+
+ 6.
+
+ 7. <div class="form-group">
+
+ 8.   <label>Product Description (Required)</label>
+
+ 9.   <input type="text" class="form-control" id="productDesc">
+
+10.   <div id="productDescError" class="error"></div>
+
+11. </div>
+
+12.
+
+13. <div class="form-group">
+
+14.   <label>Product Category (Required)</label>
+
+15.   <select class="form-control" id="productCategory">
+
+16.     <option value="">Select a Category</option>
+
+17.     <option value="Consumer Electronics">Consumer Electronics</option>
+
+18.     <option value="IT and Networking">IT and Networking</option>
+
+19.     <option value="Computer Components">Computer Components</option>
+
+20.     <option value="Peripherals">Peripherals</option>
+
+21.     <option value="Accessories">Accessories</option>
+
+22.   </select>
+
+23.   <div id="productCategoryError" class="error"></div>
+
+24. </div>
+
+25.
+
+26. <div class="form-group">
+
+27.   <label>Unit of Measure (Required)</label>
+
+28.   <select class="form-control" id="productUnit">
+
+29.     <option value="">Select Unit</option>
+
+30.     <option value="Each">Each</option>
+
+31.     <option value="Pack">Pack</option>
+
+32.     <option value="Box">Box</option>
+
+33.     <option value="Set">Set</option>
+
+34.     <option value="Case">Case</option>
+
+35.   </select>
+
+36.   <div id="productUnitError" class="error"></div>
+
+37. </div>
+
+38.
+
+39. <div class="form-group">
+
+40.   <label>Product Price (Required)</label>
+
+41.   <input type="number" class="form-control" id="productPrice">
+
+42.   <div id="productPriceError" class="error"></div>
+
+43. </div>
+
+44.
+
+45. <div class="form-group">
+
+46.   <label>Product Weight (Optional)</label>
+
+47.   <input type="number" class="form-control" id="productWeight">
+
+48. </div>
+
+49.
+
+50. <button type="submit" class="btn btn-signup btn-block" id="submitBtn">SAVE PRODUCT</button>
+
+51. <button type="button" class="btn btn-default btn-block" id="cancelBtn" style="display:none;" onclick="cancelEdit()">CANCEL</button>
+
+52.

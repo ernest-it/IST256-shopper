@@ -1,0 +1,93 @@
+<!-- Logan: page structure for the favorites and custom restaurant page -->
+
+<div class="jumbotron text-center" style="margin-top:50px;">
+  <h1>Your Favorites</h1>
+  <p>Manage your saved restaurants and add your own custom spots.</p>
+</div>
+
+<!-- favorites grid -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center"><h3>Saved Restaurants</h3></div>
+        <div class="panel-body" style="padding:30px;">
+          <div class="row">
+            @if (favorites.length === 0) {
+              <div class="col-sm-12 empty-state">
+                You have not saved any favorites yet. Browse and tap the heart on any card.
+              </div>
+            } @else {
+              @for (r of favorites; track r.id) {
+                <div class="col-sm-6 col-md-4">
+                  <div class="restaurant-card">
+                    <h4 class="card-name">{{ r.name }}</h4>
+                    <span class="card-cuisine">{{ r.cuisine }}</span>
+                    <div class="card-row">
+                      <span class="label">RATING</span>
+                      <span class="card-rating">{{ stars(r.rating) }}</span>
+                      {{ r.rating.toFixed(1) }}
+                    </div>
+                    <div class="card-row">
+                      <span class="label">PRICE</span>
+                      <span class="card-price">{{ r.priceRange }}</span>
+                    </div>
+                    <div class="card-row"><span class="label">AREA</span>{{ r.location }}</div>
+                    <div class="card-actions">
+                      <a class="btn btn-primary-flat" [routerLink]="['/detail', r.id]">VIEW</a>
+                      <button class="btn btn-danger-flat" (click)="onRemoveFavorite(r.id)">REMOVE</button>
+                    </div>
+                  </div>
+                </div>
+              }
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- add custom restaurant form (Jeremy's component) -->
+<app-custom-form (saved)="refresh()" />
+
+<!-- list of custom restaurants you have added -->
+<div class="container-fluid" style="padding-top:0;">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center"><h3>Your Custom Restaurants</h3></div>
+        <div class="panel-body" style="padding:30px;">
+          <div class="row">
+            @if (customs.length === 0) {
+              <div class="col-sm-12 empty-state">You have not added any custom restaurants yet.</div>
+            } @else {
+              @for (r of customs; track r.id) {
+                <div class="col-sm-6 col-md-4">
+                  <div class="restaurant-card">
+                    <h4 class="card-name">{{ r.name }}</h4>
+                    <span class="card-cuisine">{{ r.cuisine }}</span>
+                    <div class="card-row">
+                      <span class="label">RATING</span>
+                      <span class="card-rating">{{ stars(r.rating) }}</span>
+                      {{ r.rating.toFixed(1) }}
+                    </div>
+                    <div class="card-row">
+                      <span class="label">PRICE</span>
+                      <span class="card-price">{{ r.priceRange }}</span>
+                    </div>
+                    <div class="card-row"><span class="label">AREA</span>{{ r.location }}</div>
+                    <div class="card-actions">
+                      <a class="btn btn-primary-flat" [routerLink]="['/detail', r.id]">VIEW</a>
+                      <button class="btn btn-danger-flat" (click)="onDeleteCustom(r.id)">DELETE</button>
+                    </div>
+                  </div>
+                </div>
+              }
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
