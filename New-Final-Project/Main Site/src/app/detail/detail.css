@@ -1,0 +1,45 @@
+/* Mason: detail view styles */
+
+.detail-info {
+  background-color: #fff;
+  padding: 30px;
+  border: 1px solid #e8e2d9;
+  border-radius: 6px;
+}
+
+.detail-info h2 {
+  font-family: Montserrat, sans-serif;
+  letter-spacing: 2px;
+  color: #23272f;
+  margin-top: 0;
+}
+
+.detail-row {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.detail-label {
+  font-family: Montserrat, sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #999;
+  display: inline-block;
+  width: 110px;
+}
+
+.detail-rating {
+  color: #d4a017;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+.saved-note-box {
+  background-color: #fdf3eb;
+  border-left: 4px solid #c8553d;
+  padding: 15px 20px;
+  margin-top: 15px;
+  border-radius: 4px;
+  font-style: italic;
+  color: #444;
+}

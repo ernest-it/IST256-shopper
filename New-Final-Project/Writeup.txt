@@ -1,0 +1,73 @@
+IST 256 Final Project Writeup
+Group 5: Will Cressman, Logan Henry, Jeremy Lucotch, Mason Miller
+
+
+Topic
+Restaurant Choices App. We built a web app called Dine Finder where a user can
+browse restaurants, save favorites, write personal notes with a 1 to 10 ranking,
+and add their own custom restaurants.
+
+
+Description
+Dine Finder is built in Angular 18 with Bootstrap 3 for styling. The app has
+three pages that the user can navigate between with the navbar. The browse page
+shows all restaurants as cards with search, filter, and sort options. The
+detail page shows full info about one restaurant and lets the user add a note
+and a personal ranking. The favorites page shows the saved restaurants and
+also has a form to add custom restaurants. Restaurant data comes from a local
+JSON file and gets fetched async on page load. Favorites, notes, and custom
+restaurants are saved to localStorage so they stick around after a refresh.
+
+
+Features
+- Three pages: browse, detail, favorites
+- Search restaurants by name or description
+- Filter by cuisine, price range, and minimum rating
+- Sort by rating, price, or name
+- Save and remove favorites with the heart icon on each card
+- Write personal notes and a 1 to 10 ranking for any restaurant
+- Update or delete a saved note
+- Add custom restaurants through a validated form
+- Delete custom restaurants from the favorites page
+- Two forms with validation (notes form and custom restaurant form)
+- Restaurant data loaded from a JSON file with fetch
+- Saved data persists in localStorage
+
+
+Instructions for running locally
+You need Node.js installed. Get the LTS version from https://nodejs.org
+
+Install the Angular CLI globally one time:
+    npm install -g @angular/cli
+
+Then from inside the Main Site folder:
+    npm install
+    npm start
+
+This starts the dev server. Open a browser to http://localhost:4200
+
+
+Member contributions
+
+Logan Henry, Project Manager
+Wrote all the page templates including the navbar, browse, detail, favorites,
+and custom form. Did the shared CSS theme in styles.css including the dark
+navbar, jumbotron header, panels, buttons, and footer. Set up the Angular
+project structure, the route definitions, and the app shell.
+
+Mason Miller, Lead Designer
+Wrote the browse page logic with the search, filter, and sort pipeline. Wrote
+the favorites page logic that pulls saved favorites and custom restaurants
+from the data service. Did the card CSS including the heart icon, the cuisine
+badge, the gold star rating, and the filter bar.
+
+Will Cressman, Data and Integration Lead
+Built the restaurants.json data file with 15 restaurants. Wrote the data
+service that fetches the JSON file, manages favorites and notes in
+localStorage, and handles add and delete for custom restaurants.
+
+Jeremy Lucotch, QA and Documentation Lead
+Wrote the detail page logic and the notes form validation including save,
+update, and delete behavior. Wrote the custom restaurant form validation on
+the favorites page. Tested every page across the browse, detail, and
+favorites flows before submission.

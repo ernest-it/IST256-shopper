@@ -1,0 +1,81 @@
+/* Mason: favorites view styles */
+
+/* ---- Restaurant Card ---- */
+
+.restaurant-card {
+  background-color: #fff;
+  border: 1px solid #e8e2d9;
+  border-radius: 6px;
+  margin-bottom: 25px;
+  padding: 20px;
+  position: relative;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.restaurant-card:hover {
+  box-shadow: 0 8px 24px rgba(35, 39, 47, 0.12);
+  transform: translateY(-2px);
+}
+
+.card-name {
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #23272f;
+  margin: 0 0 8px 0;
+  font-weight: bold;
+}
+
+.card-cuisine {
+  font-family: Montserrat, sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #fff;
+  background-color: #c8553d;
+  padding: 4px 10px;
+  display: inline-block;
+  margin-bottom: 12px;
+  border-radius: 3px;
+}
+
+.card-row {
+  font-size: 13px;
+  color: #444;
+  margin: 4px 0;
+}
+
+.card-row .label {
+  font-family: Montserrat, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #999;
+  display: inline-block;
+  width: 80px;
+}
+
+.card-rating {
+  color: #d4a017;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.card-price {
+  color: #2a7a2a;
+  font-weight: bold;
+}
+
+.card-actions {
+  margin-top: 15px;
+  border-top: 1px solid #f0ebe2;
+  padding-top: 12px;
+  text-align: center;
+}
+
+.card-actions .btn {
+  border-radius: 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  margin: 0 3px;
+}

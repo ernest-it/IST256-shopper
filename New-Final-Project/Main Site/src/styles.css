@@ -1,0 +1,137 @@
+/* Logan: shared theme styles for the Dine Finder site */
+
+body {
+  font: 400 15px Lato, sans-serif;
+  line-height: 1.8;
+  color: #23272f;
+  background: #fdf9f3;
+}
+
+.navbar {
+  margin-bottom: 0;
+  background-color: #23272f;
+  z-index: 9999;
+  border: 0;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  border-radius: 0;
+  font-family: Montserrat, sans-serif;
+}
+
+.navbar li a, .navbar .navbar-brand {
+  color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+  color: #23272f !important;
+  background-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.jumbotron {
+  background-color: #23272f;
+  color: #ffffff;
+  padding: 100px 25px;
+  font-family: Montserrat, sans-serif;
+}
+
+.container-fluid {
+  padding: 60px 50px;
+}
+
+.panel {
+  border: 1px solid #e8e2d9;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.panel-heading {
+  color: #fff !important;
+  background-color: #23272f !important;
+  padding: 25px;
+  border-bottom: 1px solid transparent;
+  border-radius: 6px 6px 0 0;
+}
+
+.form-control {
+  border-radius: 4px;
+  border: 1px solid #d8d2c9;
+}
+
+.form-control:focus {
+  border-color: #c8553d;
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(200, 85, 61, 0.15);
+}
+
+.btn-primary-flat {
+  background-color: #c8553d;
+  color: #fff;
+  border-radius: 4px;
+  border: 1px solid #c8553d;
+  padding: 10px 30px;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: 2px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary-flat:hover {
+  background-color: #a8442e;
+  color: #fff;
+  border: 1px solid #a8442e;
+}
+
+.btn-danger-flat {
+  background-color: #fff;
+  color: #c8553d;
+  border-radius: 4px;
+  border: 1px solid #c8553d;
+  padding: 10px 30px;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: 2px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-danger-flat:hover {
+  background-color: #c8553d;
+  color: #fff;
+  border: 1px solid #c8553d;
+}
+
+.table > thead > tr > th {
+  background-color: #23272f;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+/* error text under form fields */
+.error {
+  color: #c8553d;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 14px;
+  border-top: 1px solid #e8e2d9;
+  background: #fff;
+}
+
+.controls-row {
+  margin-bottom: 15px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-style: italic;
+}

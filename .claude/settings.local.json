@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm start *)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(cmd //c \"taskkill /F /IM node.exe\")",
+      "PowerShell($src = \"C:\\\\Users\\\\logan\\\\Documents\\\\GitHub\\\\IST256-shopper-1\\\\New-Final-Project\"; $dest = \"C:\\\\Users\\\\logan\\\\Documents\\\\GitHub\\\\IST256-shopper-1\\\\Group5-DineFinder.zip\"; if \\(Test-Path $dest\\) { Remove-Item $dest -Force }; Compress-Archive -Path \"$src\\\\Main Site\",\"$src\\\\Collaborator Files\" -DestinationPath $dest -CompressionLevel Optimal; Get-Item $dest | Select-Object Name, Length, LastWriteTime)",
+      "PowerShell(Add-Type -AssemblyName System.IO.Compression.FileSystem; $zip = [System.IO.Compression.ZipFile]::OpenRead\\(\"C:\\\\Users\\\\logan\\\\Documents\\\\GitHub\\\\IST256-shopper-1\\\\Group5-DineFinder.zip\"\\); $zip.Entries | Select-Object FullName, Length | Format-Table -AutoSize; $zip.Dispose\\(\\))",
+      "Bash(npm run *)"
+    ]
+  }
+}
